@@ -5,8 +5,8 @@ public class Main {
 	
 	private static TUI tui;
 
+	//Initialize UI with new Controller
 	public static void main(String[] args) {
-		System.out.println("test");
 		tui = new TUI(new DanceShow());
 	}
 

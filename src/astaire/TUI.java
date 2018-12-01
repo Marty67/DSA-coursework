@@ -59,7 +59,7 @@ public class TUI {
 			display("Enter the required number of gaps between dances:");
 			String gap = stdIn.nextLine().trim();
 			try {
-				display(controller.checkFeasibilityOfRunningOrder(dataFile, (new Integer(gap)).intValue()));
+				display(controller.checkFeasibilityOfRunningOrder(dataFile, (Integer.valueOf(gap)).intValue()));
 			} catch (NumberFormatException e) {
 				display("You have not entered the number of gaps as an integer. Sorry, no checking can be done.");
 			}
@@ -68,7 +68,7 @@ public class TUI {
 			display("Generates a running order...");
 			display("Enter the required number of gaps between dances:");
 			try {
-				display(controller.generateRunningOrder((new Integer(stdIn.nextLine().trim())).intValue()));
+				display(controller.generateRunningOrder((Integer.valueOf(stdIn.nextLine().trim())).intValue()));
 			} catch (NumberFormatException e) {
 				display("You have not entered the number of gaps as an integer. Sorry, no checking can be done.");
 			}
