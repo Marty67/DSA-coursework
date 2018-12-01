@@ -47,11 +47,25 @@ public class DanceShow implements Controller {
 		BufferedReader br = null;
 		String line = "";
 		String csvSplit = ",";
+		Boolean first = true;
 		
+		//Check array efficiency and replace if necessary
 		try {
 			br = new BufferedReader(new FileReader(file));
 			while((line = br.readLine()) != null) {
-				
+				if(!first) {
+				String[] lineArr = line.split("\t");
+				if(lineArr[0] != null) {
+					DanceGroup d = new DanceGroup(lineArr[0]);
+					danceGroups.add(d);
+					String[] nameArr = lineArr[1].split(",");
+					for(String s:nameArr) {
+						s = s.trim();
+						d.addMember(s);
+					}
+				}
+			}
+				first = false;
 			}
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
