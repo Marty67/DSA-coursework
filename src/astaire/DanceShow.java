@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class DanceShow implements Controller {
 	
@@ -53,10 +56,65 @@ public class DanceShow implements Controller {
 		return dancesPerformers;
 	}
 
+	//TODO:Check dancegroups aswell
 	@Override
 	public String checkFeasibilityOfRunningOrder(String filename, int gaps) {
-		// TODO Auto-generated method stub
-		return null;
+		BufferedReader br = null;
+		String line = "";
+		String csvSplit = ",";
+		String issues = "";
+		Boolean first = true;
+		ArrayList<Dance> runningOrder = new ArrayList<Dance>();
+		
+		try {
+			br = new BufferedReader(new FileReader(filename));
+			while((line = br.readLine()) != null) {
+				if(!first) {
+				String[] lineArr = line.split("\t");
+				if(lineArr[0] != null) {
+					lineArr[0] = lineArr[0].trim();
+					String[] nameArr = lineArr[1].split(csvSplit);
+					Dance d = new Dance(lineArr[0]);
+					runningOrder.add(d);
+					for(String s:nameArr) {
+						s = s.trim();
+						d.addMember(s);
+					}
+				}
+			}
+				first = false;
+			}
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+		} catch(IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		//Integer is gap from last dance
+		HashMap<String,Integer> dancers = new HashMap<String,Integer>();
+		for(Dance d:runningOrder) {
+			for(String m:d.getMembers()) {
+				if(dancers.containsKey(m)) {
+					if(dancers.get(m)<gaps) {
+						issues += m+" didn't have enough time" +"\n";
+					}
+				}
+				dancers.put(m, 0);
+			}
+			for(HashMap.Entry<String,Integer> entry:dancers.entrySet()) {
+				int n = entry.getValue() +1;
+				dancers.put(entry.getKey(),n);
+				}
+		}
+		return issues;
 	}
 
 	@Override
@@ -105,7 +163,6 @@ public class DanceShow implements Controller {
 //				}
 //				first = true;
 //	}
-	
 	//Initialises with dance data from 'dances' and danceGroups
 	private void init() {
 		String groupFile = "/Users/admin/eclipse-workspace/DSA/csv/danceShowData_danceGroups.csv";
