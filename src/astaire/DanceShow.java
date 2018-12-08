@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class DanceShow implements Controller {
 	
@@ -33,8 +35,22 @@ public class DanceShow implements Controller {
 
 	@Override
 	public String listAllDancesAndPerformers() {
-		// TODO Auto-generated method stub
-		return null;
+		String dancesPerformers = "";
+		ArrayList<Dance> dancesAlphabetical = dances;
+		Collections.sort(dancesAlphabetical, new Comparator<Dance>() {
+			public int compare(final Dance d1,final Dance d2) {
+				return d1.getName().compareTo(d2.getName());
+			}
+		});
+		for(Dance d:dancesAlphabetical) {
+			Collections.sort(d.getMembers());
+			dancesPerformers += d.getName() + ": ";
+			for(String s:d.getMembers()) {
+				dancesPerformers += s + " ";
+			}
+			dancesPerformers += "\n";
+		}
+		return dancesPerformers;
 	}
 
 	@Override
