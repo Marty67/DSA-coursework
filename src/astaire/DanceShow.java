@@ -98,13 +98,13 @@ public class DanceShow implements Controller {
 			}
 		}
 		
-		//Integer is gap from last dance
+		//Integer value is gap from last dance member(key) performed
 		HashMap<String,Integer> dancers = new HashMap<String,Integer>();
 		for(Dance d:runningOrder) {
 			for(String m:d.getMembers()) {
 				if(dancers.containsKey(m)) {
 					if(dancers.get(m)<gaps) {
-						issues += m+" didn't have enough time" +"\n";
+						issues += m+" didn't have enough time to get ready for '"+d.getName()+"'" +"\n";
 					}
 				}
 				dancers.put(m, 0);
@@ -123,47 +123,7 @@ public class DanceShow implements Controller {
 		return null;
 	}
 	
-//	private void init2(String file,ArrayList<T> list) {
-//		BufferedReader br = null;
-//		String line = "";
-//		String csvSplit = ",";
-//		Boolean first = true;
-//		//TODO:Check array efficiency and replace if necessary
-//				//Make danceGroups from danceGroups.csv
-//				try {
-//					br = new BufferedReader(new FileReader(file));
-//					while((line = br.readLine()) != null) {
-//						if(!first) {
-//						String[] lineArr = line.split("\t");
-//						if(lineArr[0] != null) {
-//							lineArr[0] = lineArr[0].trim();
-//							DanceGroup d = new DanceGroup(lineArr[0]);
-//							danceGroups.add(d);
-//							String[] nameArr = lineArr[1].split(csvSplit);
-//							for(String s:nameArr) {
-//								s = s.trim();
-//								d.addMember(s);
-//							}
-//						}
-//					}
-//						first = false;
-//					}
-//				} catch(FileNotFoundException e) {
-//					e.printStackTrace();
-//				} catch(IOException e) {
-//					e.printStackTrace();
-//				} finally {
-//					if(br != null) {
-//						try {
-//							br.close();
-//						} catch (IOException e) {
-//							e.printStackTrace();
-//						}
-//					}
-//				}
-//				first = true;
-//	}
-	//Initialises with dance data from 'dances' and danceGroups
+	//Initialises with data about dances, groups and their members (from 'dances' and 'danceGroups') into arraylists
 	private void init() {
 		String groupFile = "/Users/admin/eclipse-workspace/DSA/csv/danceShowData_danceGroups.csv";
 		String danceFile = "/Users/admin/eclipse-workspace/DSA/csv/danceShowData_dances.csv";
@@ -251,4 +211,45 @@ public class DanceShow implements Controller {
 		}
 	}
 
+	
+//	private void parseFile(String file,ArrayList<T> list) {
+//		BufferedReader br = null;
+//		String line = "";
+//		String csvSplit = ",";
+//		Boolean first = true;
+//		//TODO:Check array efficiency and replace if necessary
+//				//Make danceGroups from danceGroups.csv
+//				try {
+//					br = new BufferedReader(new FileReader(file));
+//					while((line = br.readLine()) != null) {
+//						if(!first) {
+//						String[] lineArr = line.split("\t");
+//						if(lineArr[0] != null) {
+//							lineArr[0] = lineArr[0].trim();
+//							DanceGroup d = new DanceGroup(lineArr[0]);
+//							danceGroups.add(d);
+//							String[] nameArr = lineArr[1].split(csvSplit);
+//							for(String s:nameArr) {
+//								s = s.trim();
+//								d.addMember(s);
+//							}
+//						}
+//					}
+//						first = false;
+//					}
+//				} catch(FileNotFoundException e) {
+//					e.printStackTrace();
+//				} catch(IOException e) {
+//					e.printStackTrace();
+//				} finally {
+//					if(br != null) {
+//						try {
+//							br.close();
+//						} catch (IOException e) {
+//							e.printStackTrace();
+//						}
+//					}
+//				}
+//				first = true;
+//	}
 }
