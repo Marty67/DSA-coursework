@@ -128,8 +128,8 @@ public class DanceShow implements Controller {
 	
 	//Initialises with data about dances, groups and their members (from 'dances' and 'danceGroups') into arraylists
 	private void init() {
-		String groupFile = "/Users/admin/eclipse-workspace/DSA/csv/danceShowData_danceGroups.csv";
-		String danceFile = "/Users/admin/eclipse-workspace/DSA/csv/danceShowData_dances.csv";
+		String groupFile = "csv/danceShowData_danceGroups.csv";
+		String danceFile = "csv/danceShowData_dances.csv";
 		//TODO:Check array efficiency and replace if necessary
 		//Make danceGroups from danceGroups.csv
 		parseGroup(groupFile);
