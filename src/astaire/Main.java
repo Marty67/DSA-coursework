@@ -12,11 +12,10 @@ public class Main {
 	
 	private static TUI tui;
 
-	//Initialize UI with new Controller
+
 	/**
-	 * Method
-	 * @param 
-	 * @return  
+	 * Initialise UI with {@link Controller}
+	 * @param args
 	 */
 	public static void main(String[] args) {
 		tui = new TUI(new DanceShow());

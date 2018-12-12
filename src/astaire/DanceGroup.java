@@ -12,50 +12,49 @@ import java.util.ArrayList;
 
 public class DanceGroup {
 	
+	/**
+	 * Name of dance group
+	 */
 	private String name;
+	/**
+	 * Arraylist of Members
+	 */
 	private ArrayList<String> members;
 	
-	/**
-	 * Method
-	 * @param 
-	 * @return  
-	 */
+
 	public DanceGroup(String name) {
 		this.name = name;
 		members = new ArrayList<String>();
 	}
 	
 	/**
-	 * Method
-	 * @param 
-	 * @return  
+	 * Returns {@link #name}
+	 * @return <code>String</code>
 	 */
 	public String getName() {
 		return name;
 	}
 	
 	/**
-	 * Method
-	 * @param 
-	 * @return  
+	 * Adds a Members
+	 * @param member Members to add 
 	 */
 	public void addMember(String member) {
 		members.add(member);
 	}
 	
 	/**
-	 * Method
-	 * @param 
-	 * @return  
+	 * Gets {@link #members} from Arraylist
+	 * @return #members
 	 */
 	public ArrayList<String> getMembers() {
 		return members;
 	}
 	
 	/**
-	 * Method
-	 * @param 
-	 * @return  
+	 * Method Checks if members contain
+	 * @param s
+	 * @return  b
 	 */
 	public boolean contains(String s) {
 		boolean b = false;

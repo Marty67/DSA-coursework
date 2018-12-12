@@ -58,9 +58,8 @@ public class DanceShow implements Controller {
 	}
 
 	/**
-	 * Method
-	 * @param 
-	 * @return  
+	 * Method lists all the dance numbers and the name of the respective performers in alphabetical order
+	 * @return  String representation of dance numbers and the respective performers in alphabetical order. 
 	 */
 	public String listAllDancesAndPerformers() {
 		String dancesPerformers = "";
@@ -81,9 +80,10 @@ public class DanceShow implements Controller {
 		return dancesPerformers;
 	}
 	/**
-	 * Method
-	 * @param 
-	 * @return  
+	 * Method involves the checking of the feasibility of a given running order
+	 * @param String filename of CSV File
+	 * @param Integer gaps the required number of gaps between the dances for each of the dancer.
+	 * @return String representation of Issues
 	 */
 	public String checkFeasibilityOfRunningOrder(String filename, int gaps) {
 		BufferedReader br = null;
@@ -145,25 +145,23 @@ public class DanceShow implements Controller {
 		return issues;
 	}
 
-	@Override
+
 	/**
-	 * Method
-	 * @param 
-	 * @return  
+	 * Method generates running order of the dances for the dance show.
+	 * @param Integer gaps the required number of gaps between the dances for each of the dancer.
+	 * @return  String representation of generated running order.
 	 */
 	public String generateRunningOrder(int gaps) {
-		// TODO Auto-generated method stub
+
 		ArrayList<Dance> runningOrder = new ArrayList<Dance>();
 		HashMap<String,Integer> dancers = new HashMap<String,Integer>();
 		
 		return null;
 	}
 	
-	//Initialises with data about dances, groups and their members (from 'dances' and 'danceGroups') into arraylists
+	
 	/**
-	 * Method
-	 * @param 
-	 * @return  
+	 * Method Initialises the data about dances, groups and their members - from 'dances' and 'dancegroups' into Arraylists.
 	 */
 	private void init() {
 		String groupFile = "csv/danceShowData_danceGroups.csv";
@@ -176,7 +174,10 @@ public class DanceShow implements Controller {
 	}
 
 	
-	
+	/**
+	 * Parsing for Dance
+	 * @param String file
+	 */
 	private void parseDance(String file) {
 		BufferedReader br = null;
 		String line = "";
@@ -228,7 +229,10 @@ public class DanceShow implements Controller {
 				first = true;
 	}
 	
-
+	/**
+	 * Parsing for Dance Group
+	 * @param String file
+	 */
 	private void parseGroup(String file) {
 		BufferedReader br = null;
 		String line = "";
