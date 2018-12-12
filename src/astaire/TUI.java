@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package astaire;
 
 import java.util.Scanner;
