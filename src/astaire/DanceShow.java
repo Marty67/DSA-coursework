@@ -121,10 +121,10 @@ public class DanceShow implements Controller {
 	/**
 	 * Generates a running order of the dances for the dance show.
 	 * @param gaps the required number of gaps between dances for each dancer
-	 * @param  
-	 * @return	a String representation of the generate running order
+	 * @return a String representation of the generate running order
 	 */
 	public String generateRunningOrder(int gaps) {
+		Boolean sorted = false;
 		String order = "";
 		ArrayList<Dance> runningOrder = new ArrayList<Dance>();
 		HashSet<Dance> danceSet = new HashSet<Dance>();
@@ -148,8 +148,63 @@ public class DanceShow implements Controller {
 			}
 		}
 		
+		//The Integer value is the total number of unique dances that the members of this dance are a part of 
+		HashMap<Dance,Integer> danceSort = new HashMap<Dance,Integer>(); 
+		for(Dance dance:dances) {
+			HashSet<Dance> unique = new HashSet<Dance>();
+			for(String member:dance.getMembers()) {
+				unique.addAll(dancers.get(member));
+			}
+			int uniqueDances = unique.size();
+			danceSort.put(dance, uniqueDances);
+		}
+		
+		runningOrder = dances;
+		
+		//Sorts running order according to number of unique dances the members are a part of
+		//The reasoning for this is that as the number of unique dances increases, so does the possibility of complications
+		Collections.sort(runningOrder,new Comparator<Dance>() {
+			public int compare(final Dance d1,final Dance d2) {
+				return danceSort.get(d1).compareTo(danceSort.get(d2));
+			}
+		});
+		
+		if(checkFeasibilityOfRunningOrder(runningOrder,gaps)) {
+			//Running order found
+			for(Dance dance:runningOrder) {
+			order += dance.getName() +": ";
+			for(String member:dance.getMembers()) {
+				order += member +" ";
+			}
+			order += "\n";
+//			order += ": "+danceSort.get(dance)+"\n";
+		}
+		}
+		else if(!sorted) {
+			order = "Could not generate running order";
+		}
 		
 		return order;
+	}
+	
+	private boolean checkFeasibilityOfRunningOrder(ArrayList<Dance> dances, int gaps) {
+		boolean sorted = false;
+		HashMap<String,Integer> dancers = new HashMap<String,Integer>();
+		for(Dance dance:dances) {
+			for(String m:dance.getMembers()) {
+				if((dancers.containsKey(m)) && (dancers.get(m)<gaps)) {
+					sorted = false;
+					return sorted;
+				}
+				dancers.put(m, 0);
+			}
+			for(HashMap.Entry<String,Integer> entry:dancers.entrySet()) {
+				int n = entry.getValue() + 1;
+				dancers.put(entry.getKey(),n);
+				}
+		}
+		sorted = true;
+		return sorted;
 	}
 	
 	/**
