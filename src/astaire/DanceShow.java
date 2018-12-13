@@ -147,7 +147,6 @@ public class DanceShow implements Controller {
 				}
 			}
 		}
-<<<<<<< HEAD
 		
 		//The Integer value is the total number of unique dances that the members of this dance are a part of 
 		HashMap<Dance,Integer> danceSort = new HashMap<Dance,Integer>(); 
@@ -182,7 +181,7 @@ public class DanceShow implements Controller {
 		}
 		}
 		else if(!sorted) {
-			order = "Could not generate running order";
+			order = "Could not generate running order"+"\n";
 		}
 		
 		return order;
@@ -207,14 +206,7 @@ public class DanceShow implements Controller {
 		sorted = true;
 		return sorted;
 	}
-	
-=======
 
-
-		return order;
-	}
-
->>>>>>> 3e1abd7f677f081cc419b54c0fea5f7934ab48c1
 	/**
 	 * Method Initialises the data about dances, groups and their members - from 'dances' and 'dancegroups' into Arraylists.
 	 */
