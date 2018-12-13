@@ -52,7 +52,7 @@ public class DanceGroup {
 	}
 	
 	/**
-	 * Method checks if members contains member 
+	 * Method checks boolean and 'members' existence 
 	 * @param member
 	 * @return exists
 	 */
