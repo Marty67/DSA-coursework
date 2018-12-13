@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Map;
 
@@ -118,16 +119,37 @@ public class DanceShow implements Controller {
 
 
 	/**
-	 * Method generates running order of the dances for the dance show.
-	 * @param Integer gaps the required number of gaps between the dances for each of the dancer.
-	 * @return  String representation of generated running order.
+	 * Generates a running order of the dances for the dance show.
+	 * @param gaps the required number of gaps between dances for each dancer
+	 * @param  
+	 * @return	a String representation of the generate running order
 	 */
 	public String generateRunningOrder(int gaps) {
-
+		String order = "";
 		ArrayList<Dance> runningOrder = new ArrayList<Dance>();
-		HashMap<String,ArrayList<Dance>> dancers = new HashMap<String,ArrayList<Dance>>();
+		HashSet<Dance> danceSet = new HashSet<Dance>();
+		HashMap<String,HashSet<Dance>> dancers = new HashMap<String,HashSet<Dance>>();
 		
-		return null;
+		//Initialises dancers; a map where the key is the dancer, and the values are all the dances they are members of
+		for(Dance dance:dances) {
+			for(String member:dance.getMembers()) {
+				//If key already exists
+				if(dancers.containsKey(member)) {
+					danceSet = dancers.get(member);
+					danceSet.add(dance);
+					dancers.put(member, danceSet);
+				} 
+				//Else create new key
+				else {
+					danceSet = new HashSet<Dance>();
+					danceSet.add(dance);
+					dancers.put(member,danceSet);
+				}
+			}
+		}
+		
+		
+		return order;
 	}
 	
 	/**

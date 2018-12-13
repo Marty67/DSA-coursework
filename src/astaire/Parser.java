@@ -9,12 +9,14 @@ import java.util.ArrayList;
 public class Parser {
 	
 	private String line = "";
-	private String csvSplit = ",";
+	private final static String CSV_SPLIT = ",";
 	
 	public Parser() {}
 
 	/**
 	 * Parsing for Dance
+	 * This method uses an ArrayList of dance groups to distinguish between a member and a group, and uses this to replace dance groups
+	 * with the members they are composed of.
 	 * @param String file
 	 */
 	public ArrayList<Dance> parseDance(String file, ArrayList<Dance> dances, ArrayList<DanceGroup> danceGroups) {
@@ -33,7 +35,7 @@ public class Parser {
 					lineArr[0] = lineArr[0].trim();
 					Dance d = new Dance(lineArr[0]);
 					danceList.add(d);
-					String[] memberArr = lineArr[1].split(csvSplit);
+					String[] memberArr = lineArr[1].split(CSV_SPLIT);
 					for(String s:memberArr) {
 						s = s.trim();
 						boolean isGroup = false;
@@ -81,7 +83,7 @@ public class Parser {
 				String[] lineArr = line.split("\t");
 				if(lineArr[0] != null) {
 					lineArr[0] = lineArr[0].trim();
-					String[] nameArr = lineArr[1].split(csvSplit);
+					String[] nameArr = lineArr[1].split(CSV_SPLIT);
 					Dance d = new Dance(lineArr[0]);
 					danceList.add(d);
 					for(String s:nameArr) {
@@ -129,7 +131,7 @@ public class Parser {
 							lineArr[0] = lineArr[0].trim();
 							DanceGroup d = new DanceGroup(lineArr[0]);
 							groupList.add(d);
-							String[] nameArr = lineArr[1].split(csvSplit);
+							String[] nameArr = lineArr[1].split(CSV_SPLIT);
 							for(String s:nameArr) {
 								s = s.trim();
 								d.addMember(s);
