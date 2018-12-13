@@ -14,6 +14,50 @@ public class Parser {
 	public Parser() {}
 
 	/**
+	 * Method handles the Initialising of the ArrayList, with the name of the dancers and their members.
+	 * @param String File and ArrayList<Dance> Dance is taken
+	 */
+	public ArrayList<Dance> parseDance(String file,ArrayList<Dance> dances){
+		BufferedReader br = null;
+		line = "";
+		Boolean first = true;
+		ArrayList<Dance> danceList = dances;
+		try {
+			br = new BufferedReader(new FileReader(file));
+			while((line = br.readLine()) != null) {
+				if(!first) {
+					String[] lineArr = line.split("\t");
+					if(lineArr[0] != null) {
+						lineArr[0] = lineArr[0].trim();
+						String[] nameArr = lineArr[1].split(CSV_SPLIT);
+						Dance d = new Dance(lineArr[0]);
+						danceList.add(d);
+						for(String s:nameArr) {
+							s = s.trim();
+							d.addMember(s);
+						}
+					}
+				}
+				first = false;
+			}
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+		} catch(IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		first = true;
+		return danceList;
+	}
+	
+	/**
 	 * Parsing for Dance
 	 * This method uses an ArrayList of dance groups to distinguish between a member and a group, and uses this to replace dance groups
 	 * with the members they are composed of.
@@ -49,50 +93,6 @@ public class Parser {
 							if(!isGroup) {
 								d.addMember(s);
 							}
-						}
-					}
-				}
-				first = false;
-			}
-		} catch(FileNotFoundException e) {
-			e.printStackTrace();
-		} catch(IOException e) {
-			e.printStackTrace();
-		} finally {
-			if(br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		first = true;
-		return danceList;
-	}
-
-	/**
-	 * Method handles the Initialising of the ArrayList, with the name of the dancers and their members.
-	 * @param String File and ArrayList<Dance> Dance is taken
-	 */
-	public ArrayList<Dance> parseDance(String file,ArrayList<Dance> dances){
-		BufferedReader br = null;
-		line = "";
-		Boolean first = true;
-		ArrayList<Dance> danceList = dances;
-		try {
-			br = new BufferedReader(new FileReader(file));
-			while((line = br.readLine()) != null) {
-				if(!first) {
-					String[] lineArr = line.split("\t");
-					if(lineArr[0] != null) {
-						lineArr[0] = lineArr[0].trim();
-						String[] nameArr = lineArr[1].split(CSV_SPLIT);
-						Dance d = new Dance(lineArr[0]);
-						danceList.add(d);
-						for(String s:nameArr) {
-							s = s.trim();
-							d.addMember(s);
 						}
 					}
 				}

@@ -161,6 +161,7 @@ public class DanceShow implements Controller {
 		
 		runningOrder = dances;
 		
+		//Initial sorting 
 		//Sorts running order according to number of unique dances the members are a part of
 		//The reasoning for this is that as the number of unique dances increases, so does the possibility of complications
 		Collections.sort(runningOrder,new Comparator<Dance>() {
@@ -178,7 +179,7 @@ public class DanceShow implements Controller {
 			}
 			order += "\n";
 //			order += ": "+danceSort.get(dance)+"\n";
-		}
+			}
 		}
 		else if(!sorted) {
 			order = "Could not generate running order"+"\n";
@@ -187,6 +188,12 @@ public class DanceShow implements Controller {
 		return order;
 	}
 	
+	/*
+	 * Method involves the checking of the feasibility of a given running order
+	 * @param ArrayList dances is the list of dances in their running order
+	 * @param Integer gaps the required number of gaps between the dances for each of the dancer.
+	 * @return String representation of Issues
+	 */
 	private boolean checkFeasibilityOfRunningOrder(ArrayList<Dance> dances, int gaps) {
 		boolean sorted = false;
 		HashMap<String,Integer> dancers = new HashMap<String,Integer>();

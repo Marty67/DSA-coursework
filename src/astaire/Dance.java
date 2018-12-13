@@ -61,7 +61,7 @@ public class Dance {
 	/**
 	 * Method Checks if members contain
 	 * @param member
-	 * @return  b
+	 * @return exists
 	 */
 	public boolean contains(String member) {
 		boolean exists = false;
