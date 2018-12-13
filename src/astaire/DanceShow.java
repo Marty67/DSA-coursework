@@ -21,8 +21,6 @@ import java.util.Map;
 
 public class DanceShow implements Controller {
 
-
-	//TODO:Check ArrayList efficiency and replace if needed
 	/**
 	 * Array of {@link DanceGroup} objects
 	 */
@@ -129,7 +127,7 @@ public class DanceShow implements Controller {
 		ArrayList<Dance> runningOrder = new ArrayList<Dance>();
 		HashSet<Dance> danceSet = new HashSet<Dance>();
 		HashMap<String,HashSet<Dance>> dancers = new HashMap<String,HashSet<Dance>>();
-
+		
 		//Initialises dancers; a map where the key is the dancer, and the values are all the dances they are members of
 		for(Dance dance:dances) {
 			for(String member:dance.getMembers()) {
@@ -170,6 +168,7 @@ public class DanceShow implements Controller {
 			}
 		});
 		
+		//Check in case already in a functional order
 		if(checkFeasibilityOfRunningOrder(runningOrder,gaps)) {
 			//Running order found
 			for(Dance dance:runningOrder) {
@@ -180,12 +179,75 @@ public class DanceShow implements Controller {
 			order += "\n";
 //			order += ": "+danceSort.get(dance)+"\n";
 			}
+			return order;
 		}
-		else if(!sorted) {
+		
+		//Attempt to make a running order
+		ArrayList<Dance> runningOrderReturn = new ArrayList<Dance>();
+		for(Dance dance:runningOrder) {
+			if(!attemptToAdd(runningOrderReturn,dance,gaps)) {
+				break;
+			}
+		}
+		
+		if(checkFeasibilityOfRunningOrder(runningOrder,gaps)) {
+			//Running order found
+			for(Dance dance:runningOrder) {
+			order += dance.getName() +": ";
+			for(String member:dance.getMembers()) {
+				order += member +" ";
+			}
+			order += "\n";
+//			order += ": "+danceSort.get(dance)+"\n";
+			}
+			sorted = true;
+		}
+		
+		if(!sorted) {
 			order = "Could not generate running order"+"\n";
 		}
 		
 		return order;
+	}
+	
+	/*
+	 * Attempts to add dance to list whilst adhering to gap specified
+	 * @param ArrayList list of dances representing running order being added to
+	 * @param Dance dance being added to running order
+	 * @param Integer gap needed for dances to get ready inbetween dances
+	 * @return Boolean canAdd if dance was added or not
+	 */
+	private boolean attemptToAdd(ArrayList<Dance> list,Dance dance, int gap) {
+		boolean canAdd = false;
+		int g = list.size();
+		int n = 0;
+		ArrayList<Dance> potentialConflicts = new ArrayList<Dance>();
+		
+		if(list.isEmpty()) {
+			list.add(dance);
+			canAdd = true;
+		}
+		//Precaution in case of list being smaller than gap to avoid nullPointerException
+		if(gap<list.size()) {
+			g = gap;
+		}
+		for(int i=0;i<g;i++) {
+			int index = list.size() - g + i;
+			Dance currentDance = list.get(index);
+			for(String member:dance.getMembers()) {
+				if(currentDance.contains(member)) {
+					n++;
+					canAdd = false;
+				}
+			}
+		}
+		
+		if(n==0) {
+			list.add(dance);
+			canAdd = true;
+		}
+		
+		return canAdd;
 	}
 	
 	/*
