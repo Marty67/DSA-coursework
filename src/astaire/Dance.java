@@ -60,15 +60,15 @@ public class Dance {
 	
 	/**
 	 * Method Checks if members contain
-	 * @param s
+	 * @param member
 	 * @return  b
 	 */
-	public boolean contains(String s) {
-		boolean b = false;
-		if(members.contains(s)) {
-			b = true;
+	public boolean contains(String member) {
+		boolean exists = false;
+		if(members.contains(member)) {
+			exists = true;
 		}
-		return b;
+		return exists;
 	}
 
 }

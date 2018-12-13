@@ -52,15 +52,15 @@ public class DanceGroup {
 	}
 	
 	/**
-	 * Method Checks if members contain
-	 * @param s
-	 * @return  b
+	 * Method checks if members contains member 
+	 * @param member
+	 * @return exists
 	 */
-	public boolean contains(String s) {
-		boolean b = false;
-		if(members.contains(s)) {
-			b = true;
+	public boolean contains(String member) {
+		boolean exists = false;
+		if(members.contains(member)) {
+			exists = true;
 		}
-		return b;
+		return exists;
 	}
 }
