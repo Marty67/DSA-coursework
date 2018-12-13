@@ -121,7 +121,7 @@ public class DanceShow implements Controller {
 	public String generateRunningOrder(int gaps) {
 		// TODO Auto-generated method stub
 		ArrayList<Dance> runningOrder = new ArrayList<Dance>();
-		HashMap<String,Integer> dancers = new HashMap<String,Integer>();
+		HashMap<String,ArrayList<Dance>> dancers = new HashMap<String,ArrayList<Dance>>();
 		
 		return null;
 	}
