@@ -14,7 +14,7 @@ public class Dance {
 	/**
 	 * Name of dance
 	 */
-	private String name;
+	private String danceName;
 	/**
 	 * ArrayList of Members
 	 */
@@ -22,24 +22,24 @@ public class Dance {
 	
 
 	public Dance(String name) {
-		this.name = name;
+		this.danceName = name;
 		members = new ArrayList<String>();
 	}
 	
 	/**
-	 * Returns {@link #name}
+	 * Returns {@link #danceName}
 	 * @return <code>String</code>
 	 */
 	public String getName() {
-		return name;
+		return danceName;
 	}
 	
 	/**
 	 * Adds a Members
-	 * @param member Members to add 
+	 * @param danceMember Members to add 
 	 */
-	public void addMember(String member) {
-		members.add(member);
+	public void addMember(String danceMember) {
+		members.add(danceMember);
 	}
 	
 	/**
