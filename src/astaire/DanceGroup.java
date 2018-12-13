@@ -15,7 +15,7 @@ public class DanceGroup {
 	/**
 	 * Name of dance group
 	 */
-	private String name;
+	private String groupName;
 	/**
 	 * Arraylist of Members
 	 */
@@ -23,16 +23,16 @@ public class DanceGroup {
 	
 
 	public DanceGroup(String name) {
-		this.name = name;
+		this.groupName = name;
 		members = new ArrayList<String>();
 	}
 	
 	/**
-	 * Returns {@link #name}
+	 * Returns {@link #groupName}
 	 * @return <code>String</code>
 	 */
 	public String getName() {
-		return name;
+		return groupName;
 	}
 	
 	/**
