@@ -20,8 +20,8 @@ import java.util.Map;
  */
 
 public class DanceShow implements Controller {
-	
-	
+
+
 	//TODO:Check ArrayList efficiency and replace if needed
 	/**
 	 * Array of {@link DanceGroup} objects
@@ -31,9 +31,9 @@ public class DanceShow implements Controller {
 	 * Array of {@link Dance} objects
 	 */
 	private ArrayList<Dance> dances;
-	
+
 	private Parser parser;
-	
+
 	/**
 	 * Initialises {@link #danceGroups}, {@link #dances}, and runs the initialise method
 	 */
@@ -94,11 +94,11 @@ public class DanceShow implements Controller {
 		// Use for testing method
 		String issues = "";
 		ArrayList<Dance> runningOrder = new ArrayList<Dance>();
-		
+
 		runningOrder = parser.parseDance(filename, runningOrder);
-		
+
 		//Integer value is gap from last dance member(key) performed
-		
+
 		HashMap<String,Integer> dancers = new HashMap<String,Integer>();
 		for(Dance d:runningOrder) {
 			for(String m:d.getMembers()) {
@@ -112,7 +112,7 @@ public class DanceShow implements Controller {
 			for(HashMap.Entry<String,Integer> entry:dancers.entrySet()) {
 				int n = entry.getValue() + 1;
 				dancers.put(entry.getKey(),n);
-				}
+			}
 		}
 		return issues;
 	}
@@ -129,7 +129,7 @@ public class DanceShow implements Controller {
 		ArrayList<Dance> runningOrder = new ArrayList<Dance>();
 		HashSet<Dance> danceSet = new HashSet<Dance>();
 		HashMap<String,HashSet<Dance>> dancers = new HashMap<String,HashSet<Dance>>();
-		
+
 		//Initialises dancers; a map where the key is the dancer, and the values are all the dances they are members of
 		for(Dance dance:dances) {
 			for(String member:dance.getMembers()) {
@@ -147,6 +147,7 @@ public class DanceShow implements Controller {
 				}
 			}
 		}
+<<<<<<< HEAD
 		
 		//The Integer value is the total number of unique dances that the members of this dance are a part of 
 		HashMap<Dance,Integer> danceSort = new HashMap<Dance,Integer>(); 
@@ -207,6 +208,13 @@ public class DanceShow implements Controller {
 		return sorted;
 	}
 	
+=======
+
+
+		return order;
+	}
+
+>>>>>>> 3e1abd7f677f081cc419b54c0fea5f7934ab48c1
 	/**
 	 * Method Initialises the data about dances, groups and their members - from 'dances' and 'dancegroups' into Arraylists.
 	 */
@@ -215,10 +223,10 @@ public class DanceShow implements Controller {
 		String danceFile = "csv/danceShowData_dances.csv";
 		//TODO:Check array efficiency and replace if necessary
 		//Make danceGroups from danceGroups.csv
-//		parseGroup(groupFile);
+		//		parseGroup(groupFile);
 		danceGroups = parser.parseGroup(groupFile, danceGroups);
 		//Make dances from dances.csv
-//		parseDance(danceFile);
+		//		parseDance(danceFile);
 		dances = parser.parseDance(danceFile, dances, danceGroups);
 	}
 }

@@ -9,7 +9,7 @@ package astaire;
  */
 
 public class Main {
-	
+
 	private static TUI tui;
 
 
